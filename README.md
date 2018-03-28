@@ -28,3 +28,7 @@ The master branch is regularly built and tested, but is not guaranteed
 to be completely stable. Tags are regularly created to indicate new
 stable release versions of PRJCoin.
 
+WALLET DOWNLOAD
+===========================
+
+https://github.com/prjcoin/PRJCORE/releases
