@@ -1,0 +1,9 @@
+Building PRJCoin
+
+See doc/readme-qt.rst for instructions on building PRJCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of PRJCoin.
+
+See doc/build-*.txt for instructions on building prjcoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of PRJCoin.
