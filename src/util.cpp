@@ -1045,6 +1045,23 @@ const boost::filesystem::path &GetDataDir(bool fNetSpecific)
     cachedPath[fNetSpecific]=true;
     return path;
 }
+void createConf()
+{
+	srand(time(NULL));
+	ofstream pConf; 
+	pConf.open(GetConfigFile().generic_string().c_str());
+	const char* nodes =  "\nrpcuser=rpc_user_changeX"
+                         "\nrpcpassword=rpc_password_changeX"
+                         "\nrpcport=35568"
+                         "\nrpcallowip=127.0.0.1"
+                         "\ndaemon=1"
+                         "\nserver=1"
+                         "\nlistenonion=0"
+                         "\naddnode=node1.prjcoin.com"
+                         "\naddnode=node2.prjcoin.com";
+	pConf   << std::string(nodes);
+	pConf.close();	
+}
 
 boost::filesystem::path GetConfigFile()
 {
@@ -1057,9 +1074,14 @@ void ReadConfigFile(map<string, string>& mapSettingsRet,
                     map<string, vector<string> >& mapMultiSettingsRet)
 {
     boost::filesystem::ifstream streamConfig(GetConfigFile());
-    if (!streamConfig.good())
-        return; // No bitcoin.conf file is OK
-
+  if (!streamConfig.good()){
+        // Create empty darksilk.conf if it does not excist
+		createConf();
+		FILE* configFile = fopen(GetConfigFile().string().c_str(), "a");
+        if (configFile != NULL)
+            fclose(configFile);
+        return; // Nothing to read, so just return
+    }
     set<string> setOptions;
     setOptions.insert("*");
 
